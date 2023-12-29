@@ -1,16 +1,33 @@
 package RPL.MovitCuisine.order;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.Date;
+import java.util.List;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name = "orders")
 public class Order {
     @Id
-    private String orderId;
-    private LocalDate orderDate;
-    private LocalTime orderTime;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderId;
 
+    @Temporal(TemporalType.DATE)
+    private Date orderDate;
+
+    @Temporal(TemporalType.TIME)
+    private Date orderTime;
+
+    private String customerName;
+    private String customerPhone;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "order_id")
+    private List<OrderItem> orderItems;
 }
+
