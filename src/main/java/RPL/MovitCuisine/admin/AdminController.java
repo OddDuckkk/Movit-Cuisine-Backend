@@ -9,20 +9,20 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/admins")
+@RequestMapping("/api/v1/admins")
 public class AdminController {
 
     @Autowired
     private AdminService adminService;
 
-    // GET ALL ADMINS API /api/admins
+    // GET ALL ADMINS API /api/v1/admins
     @GetMapping
     public ResponseEntity<List<Admin>> getAllAdmins() {
         List<Admin> admins = adminService.getAllAdmins();
         return new ResponseEntity<>(admins, HttpStatus.OK);
     }
 
-    // GET SINGLE ADMIN API /api/admins/{adminId}
+    // GET SINGLE ADMIN API /api/v1/admins/{adminId}
     @GetMapping("/{adminId}")
     public ResponseEntity<Admin> getAdminById(@PathVariable Long adminId) {
         Optional<Admin> admin = adminService.getAdminById(adminId);
@@ -30,15 +30,15 @@ public class AdminController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // CREATE ADMIN API /api/admins
+    // CREATE ADMIN API /api/v1/admins/insert
     @PostMapping
     public ResponseEntity<Admin> createAdmin(@RequestBody Admin admin) {
         Admin createdAdmin = adminService.createAdmin(admin);
         return new ResponseEntity<>(createdAdmin, HttpStatus.CREATED);
     }
 
-    // UPDATE ADMIN API /api/admins/{adminId}
-    @PutMapping("/{adminId}")
+    // UPDATE ADMIN API /api/v1/admins/update/{adminId}
+    @PutMapping("/insert/{adminId}")
     public ResponseEntity<Admin> updateAdmin(@PathVariable Long adminId, @RequestBody Admin updatedAdmin) {
         Admin admin = adminService.updateAdmin(adminId, updatedAdmin);
         if (admin != null) {
@@ -48,8 +48,8 @@ public class AdminController {
         }
     }
 
-    // DELETE ADMIN API /api/admins/{adminId}
-    @DeleteMapping("/{adminId}")
+    // DELETE ADMIN API /api/v1/admins/delete/{adminId}
+    @DeleteMapping("/delete/{adminId}")
     public ResponseEntity<Void> deleteAdmin(@PathVariable Long adminId) {
         adminService.deleteAdmin(adminId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -29,22 +29,22 @@ public class OrderController {
                 : ResponseEntity.notFound().build();
     }
     // END
-    // CREATE ORDER API "/api/v1/orders"
-    @PostMapping
+    // CREATE ORDER API "/api/v1/orders/admin/insert"
+    @PostMapping("/admin/insert")
     public ResponseEntity<Order> createOrder(@RequestBody OrderRequest orderRequest) {
         Order createdOrder = orderService.createOrder(orderRequest);
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }
     // END
-    // UPDATE ORDER API "/api/v1/orders/{orderId}"
-    @PutMapping("/{orderId}")
+    // UPDATE ORDER API "/api/v1/orders/admin/update/{orderId}"
+    @PutMapping("/admin/update/{orderId}")
     public ResponseEntity<Order> updateOrder(@PathVariable Long orderId, @RequestBody OrderUpdateRequest updateRequest) {
         Order updatedOrder = orderService.updateOrder(orderId, updateRequest);
         return new ResponseEntity<>(updatedOrder, HttpStatus.OK);
     }
     // END
-    // DELETE ORDER API "/api/v1/orders/{orderId}"
-    @DeleteMapping("/{orderId}")
+    // DELETE ORDER API "/api/v1/orders/admin/delete/{orderId}"
+    @DeleteMapping("/admin/delete/{orderId}")
     public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
         orderService.deleteOrder(orderId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
