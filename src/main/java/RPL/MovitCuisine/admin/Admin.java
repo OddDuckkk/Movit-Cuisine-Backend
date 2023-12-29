@@ -1,8 +1,6 @@
 package RPL.MovitCuisine.admin;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +20,7 @@ import java.util.List;
 @Table(name="admin")
 public class Admin implements UserDetails {
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long adminId;
     private String adminName;
     private String adminPass;
