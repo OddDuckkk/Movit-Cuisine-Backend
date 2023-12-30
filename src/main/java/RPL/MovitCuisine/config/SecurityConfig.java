@@ -38,14 +38,16 @@ public class SecurityConfig {
                                 "/api/v1/menu/search",
                                 "/api/v1/menu/{menuId}",
                                 "/api/v1/menu/categories",
-                                "/api/v1/orders",
+                                "api/v1/orders",
                                 "/api/v1/orders/{orderId}",
+                                "/api/v1/orders/insert",
+                                "/api/v1/orders/update/{orderId}",
+                                "/api/v1/orders/delete/{orderId}",
                                 "/api/v1/auth/login",
                                 "/api/v1/auth/register")
                         .permitAll()
                         .requestMatchers("/api/v1/menu/admin/**",
-                                "/api/v1/admins/**",
-                                "/api/v1/orders/admin/**")
+                                "/api/v1/admins/**")
                         .hasAuthority("ADMIN")
                         .anyRequest()
                         .authenticated())
