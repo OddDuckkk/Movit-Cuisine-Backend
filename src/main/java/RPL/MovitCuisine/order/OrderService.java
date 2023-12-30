@@ -22,8 +22,6 @@ public class OrderService {
     }
     public Order createOrder(OrderRequest orderRequest) {
         Order order = new Order();
-        order.setOrderDate(orderRequest.getOrderDate());
-        order.setOrderTime(orderRequest.getOrderTime());
         order.setCustomerName(orderRequest.getCustomerName());
         order.setCustomerPhone(orderRequest.getCustomerPhone());
         order.setOrderItems(orderRequest.getOrderItems());
@@ -40,8 +38,6 @@ public class OrderService {
             Order existingOrder = existingOrderOptional.get();
 
             // Map fields from the request to the order entity
-            existingOrder.setOrderDate(orderUpdateRequest.getOrderDate());
-            existingOrder.setOrderTime(orderUpdateRequest.getOrderTime());
             existingOrder.setCustomerName(orderUpdateRequest.getCustomerName());
             existingOrder.setCustomerPhone(orderRequest.getCustomerPhone());
             existingOrder.setOrderItems(orderRequest.getOrderItems());

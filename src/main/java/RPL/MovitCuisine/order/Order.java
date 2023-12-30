@@ -7,6 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -20,11 +22,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date orderDate;
+    @Builder.Default
+    private LocalDate orderDate = LocalDate.now();
 
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    private Time orderTime;
+    @Builder.Default
+    private LocalTime orderTime = LocalTime.now();
 
     private String customerName;
     private String customerPhone;
